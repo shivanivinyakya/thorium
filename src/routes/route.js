@@ -15,8 +15,7 @@ router.get('/hi-there', function (req, res) {
     console.log(help)
    res.send('welcome to functionup. I am  Shivani Jain and a part of functionup thorium')
 });
-
-
+    
 
 router.get('/Hello', function (req, res) {
     let month= ["january", "February", "march", "april", "May", "June", "July", "august", "sept", "oct",  "nov", "dec"]
@@ -56,9 +55,9 @@ router.get('/Hello1', function (req, res) {
 module.exports = router;
 // adding this comment for no reason
 
-//router.get('/test-me', function (req, res) {
-    //obj.log('thorium')
-    //console.log(obj.url)
-   // res.send('welcome to functionup.I am Shivani Jain and a part of functionup thorium')
-//});
+router.get('/test-me', function (req, res) {
+    obj.log('thorium')
+    console.log(obj.url)
+   res.send('welcome to functionup.I am Shivani Jain and a part of functionup thorium')
+});
 
