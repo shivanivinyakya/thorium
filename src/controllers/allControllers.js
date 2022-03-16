@@ -1,4 +1,5 @@
 // const { default: mongoose } = require("mongoose").Types.ObjectId;
+const jwt = require("jsonwebtoken");
 const authorModel = require("../models/authorModel")
 const blogsModel = require("../models/blogsModel");
 
@@ -137,6 +138,28 @@ const deleteByAddress = async function (req, res) {
         res.status(500).send({ msg: error.message })
     }
 }
+//Phase_2
+//part-7
+const loginUser = async function (req, res) {
+    try{
+    let userName = req.body.emailId;
+    let password = req.body.password;
+    let author= await authorModel.findOne({ emailId: userName, password: password });
+    if (!author)
+      return res.send({
+        status: false,
+        msg: "username or the password is not corerct",
+      });
+      let token = jwt.sign({ authorId: author._id.toString() }, "Blog");
+
+      res.status(201).send({ status: true, msg: "Succesfully LogedIn.Here is a access Token", token: token })
+    }
+    
+    catch(error){
+        console.log(error)
+        res.status(500).send({ msg: error.message })
+    }
+  }
 
 module.exports.createAuthor = createAuthor;
 
@@ -148,51 +171,6 @@ module.exports.updateBlogs = updateBlogs;
 
 module.exports.deleteBlogs = deleteBlogs;
 
-module.exports.deleteByAddress=deleteByAddress
+module.exports.deleteByAddress=deleteByAddress;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
+module.exports.loginUser=loginUser;
